@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HeroesViewerComponent } from './components/heroes-viewer/heroes-viewer.component';
 
 @Component({
   selector: 'app-root',
