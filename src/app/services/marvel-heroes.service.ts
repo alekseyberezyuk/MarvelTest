@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HeroInfoComponent } from '../components/hero-info/hero-info.component';
 import { MarvelApiConfig } from '../configuration/marvelApiConfig';
+import { HeroData } from '../models/heroData';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,23 @@ export class MarvelHeroesService {
 
   constructor(private httpClient: HttpClient) { }
 
-  async getHeroes(): Promise<HeroInfoComponent[]> {
+  async getHeroes(): Promise<HeroData[]> {
     const url = `${this.config.baseUrl}/characters?ts=1&apikey=${this.config.apiKey}&hash=${this.config.hash}`;
-    const data = await this.httpClient.get(url, {responseType: 'json'}).toPromise();
-    console.log(data); 
-    return null;
+    const data: any = await this.httpClient.get(url, {responseType: 'json'}).toPromise();
+    let result: HeroData[] = [];
+    if(data.code == 200) {
+      const serverHeroes: any[] = data.data.results;
+      serverHeroes.forEach(h => {
+        const heroInfo = new HeroData();
+        heroInfo.id = h.id;
+        heroInfo.name = h.name;
+        heroInfo.description = h.description;
+        heroInfo.resourceUrl = h.resourceURI;
+        heroInfo.thumbnailUrl = `${h.thumbnail.path}/standard_small.jpg`;
+        result.push(heroInfo);
+      });
+    }
+    return Promise.resolve(result);
   }
 
   next() {

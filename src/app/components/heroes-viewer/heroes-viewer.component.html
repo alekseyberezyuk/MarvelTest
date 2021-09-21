@@ -1,1 +1,17 @@
-<p>heroes-viewer works!</p>
+<div>
+    <div class="container">
+     <button>Prev</button>
+     <button>Next</button>
+    </div>
+    <div class="container" *ngIf="heroesData">
+       <!-- <hero-info 
+        [hero]="heroesData[0]"
+       >
+       </hero-info> -->
+       <hero-info 
+        *ngFor="let h of heroesData"
+        [hero]="h"
+       >
+       </hero-info>
+    </div> 
+</div>

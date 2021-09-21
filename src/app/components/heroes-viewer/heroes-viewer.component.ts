@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeroData } from 'src/app/models/heroData';
 import { MarvelHeroesService } from 'src/app/services/marvel-heroes.service';
 import { HeroInfoComponent } from '../hero-info/hero-info.component';
 
@@ -8,12 +9,12 @@ import { HeroInfoComponent } from '../hero-info/hero-info.component';
   styleUrls: ['./heroes-viewer.component.scss']
 })
 export class HeroesViewerComponent implements OnInit {
-  heroesData: HeroInfoComponent[];
+  heroesData: HeroData[];
 
   constructor(private heroesService: MarvelHeroesService) { }
 
-  ngOnInit(): void {
-    this.heroesService.getHeroes();
+  async ngOnInit() {
+    this.heroesData = await this.heroesService.getHeroes();
+    console.log(this.heroesData);
   }
-
 }
