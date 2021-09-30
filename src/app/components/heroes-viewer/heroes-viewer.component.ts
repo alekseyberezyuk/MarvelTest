@@ -12,6 +12,18 @@ export class HeroesViewerComponent implements OnInit {
   heroesData: HeroData[];
 
   constructor(private heroesService: MarvelHeroesService) { }
+  
+  btnNextClicked() {
+    if(this.heroesService.next()) {
+      this.ngOnInit();
+    }
+  }
+
+  btnPrevClicked() {
+    if(this.heroesService.prev()) {
+      this.ngOnInit();
+    }
+  }
 
   async ngOnInit() {
     this.heroesData = await this.heroesService.getHeroes();

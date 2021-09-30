@@ -1,4 +1,31 @@
-div {
+.hero-info-container {
+    display: inline-flex;
+    height: 100px;
+    width: 100%;
     border: 1px solid gray;
+    border-radius: 5px;
     margin-bottom: 20px;
+    padding: 4px 2px 2px 8px;
+}
+
+.hero-info-thumbnail {
+   display: flex;
+   height: 98%;
+   width: 10%;
+}
+
+.hero-info {
+   display: flex;
+   height: 98% ;  
+   width: 90%;
+   margin-left: 10px;
+}
+
+span.hero-info-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+img {
+    border-radius: 5px;
 }

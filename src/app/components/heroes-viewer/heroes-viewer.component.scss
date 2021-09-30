@@ -1,9 +1,32 @@
 div {
     width: 100%;
 }
+
 .container {
-    width: 600px;
-    // border: 1px solid black;
+    width: 1200px;
+    border: 1px solid black;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 20px;
+}
+
+.nav-btns {
+    display: inline-flex;
+    width: 100%;
+    margin: 20px auto 10px auto;
+}
+
+.btn-delimeter {
+    display: flex;
+    width: 70%;
+}
+
+.nav-btns-container {
+    display: block;
+    width: 250px;
+    margin: 20px auto 10px auto;
+}
+
+.nav-btn {
+    width: 60px;
 }

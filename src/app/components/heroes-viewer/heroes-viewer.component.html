@@ -1,7 +1,10 @@
 <div>
-    <div class="container">
-     <button>Prev</button>
-     <button>Next</button>
+    <div class="nav-btns-container">
+    <div class="nav-btns">
+     <button class="btn btn-primary nav-btn" (click)="btnPrevClicked()">Prev</button>
+     <span class="btn-delimeter"></span>
+     <button class="btn btn-primary nav-btn" (click)="btnNextClicked()">Next</button>
+    </div>
     </div>
     <div class="container" *ngIf="heroesData">
        <!-- <hero-info 
