@@ -4,6 +4,15 @@
      <button class="btn btn-primary nav-btn" (click)="btnPrevClicked()">Prev</button>
      <span class="btn-delimeter"></span>
      <button class="btn btn-primary nav-btn" (click)="btnNextClicked()">Next</button>
+     <span class="btn-delimeter"></span>
+     <input class="searchBar" [(ngModel)]="searchParam" (keyup)="searchParamChanged()">
+     <span class="btn-delimeter"></span>
+     <select class="heroesPerPageSelect" [(ngModel)]="heroesPerPage" (change)="heroesPerPageChanged()">
+         <option value="20">20</option>
+         <option value="30">30</option>
+         <option value="50">50</option>
+         <option value="100">100</option>
+     </select>
     </div>
     </div>
     <div class="container" *ngIf="heroesData">

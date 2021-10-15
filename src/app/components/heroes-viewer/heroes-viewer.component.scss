@@ -18,15 +18,25 @@ div {
 
 .btn-delimeter {
     display: flex;
-    width: 70%;
+    width: 20px;
 }
 
 .nav-btns-container {
     display: block;
-    width: 250px;
+    width: 450px;
     margin: 20px auto 10px auto;
 }
 
 .nav-btn {
     width: 60px;
+}
+
+.searchBar {
+    width: 250px;
+    height: 40px;
+    border: solid 1px black;
+}
+
+.heroesPerPageSelect {
+   height: 40px;
 }

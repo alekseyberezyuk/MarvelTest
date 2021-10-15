@@ -8,14 +8,14 @@ import { HeroData } from '../models/heroData';
 })
 export class MarvelHeroesService {
   config = MarvelApiConfig.instance;
-  count = 20;
-  offSet = 0;
-  totalHeroes;
+  heroesPerPage: number = 20;
+  offSet: number = 0;
+  totalHeroes: number;
 
   constructor(private httpClient: HttpClient) { }
 
   async getHeroes(): Promise<HeroData[]> {
-    const url = `${this.config.baseUrl}/characters?ts=1&apikey=${this.config.apiKey}&hash=${this.config.hash}&offset=${this.offSet}`;
+    const url = `${this.config.baseUrl}/characters?ts=1&apikey=${this.config.apiKey}&hash=${this.config.hash}&offset=${this.offSet}&limit=${this.heroesPerPage}`;
     const response: any = await this.httpClient.get(url, {responseType: 'json'}).toPromise();
     let result: HeroData[] = null;
     if(response.code == 200) {
@@ -37,20 +37,27 @@ export class MarvelHeroesService {
   }
 
   next() {
-    this.offSet += this.count;
+    this.offSet += this.heroesPerPage;
     if(this.offSet >= this.totalHeroes) {
-      this.offSet -= this.count;
+      this.offSet -= this.heroesPerPage;
       return false;
     }
     return true;
   }
   
   prev() {
-    this.offSet -= this.count;
+    this.offSet -= this.heroesPerPage;
     if (this.offSet < 0) {
+      const reloadDataFromServer = this.heroesPerPage !== -this.offSet;
       this.offSet = 0;
-      return false;
+      return reloadDataFromServer;
     }
     return true;
+  }
+
+  setHeroesPerPage(numberOfHeroes: number) {
+    if (numberOfHeroes && numberOfHeroes >= 20) {
+      this.heroesPerPage = numberOfHeroes;
+    }
   }
 }

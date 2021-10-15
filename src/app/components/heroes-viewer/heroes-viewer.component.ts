@@ -10,6 +10,9 @@ import { HeroInfoComponent } from '../hero-info/hero-info.component';
 })
 export class HeroesViewerComponent implements OnInit {
   heroesData: HeroData[];
+  heroesDataCache: HeroData[];
+  heroesPerPage = '20';
+  searchParam = '';
 
   constructor(private heroesService: MarvelHeroesService) { }
   
@@ -25,8 +28,21 @@ export class HeroesViewerComponent implements OnInit {
     }
   }
 
+  searchParamChanged() {
+    const p = this.searchParam.toLocaleLowerCase();
+    this.heroesData = this.heroesDataCache.filter(h => 
+      h.name.toLocaleLowerCase().includes(p) || h.description.toLocaleLowerCase().includes(p)
+    );
+  }
+
+  heroesPerPageChanged() {
+    const heroesPerPageNumber = parseInt(this.heroesPerPage);
+    this.heroesService.setHeroesPerPage(heroesPerPageNumber);
+    this.ngOnInit();
+  }
+
   async ngOnInit() {
     this.heroesData = await this.heroesService.getHeroes();
-    console.log(this.heroesData);
+    this.heroesDataCache = this.heroesData;
   }
 }
